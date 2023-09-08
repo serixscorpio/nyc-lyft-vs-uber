@@ -23,9 +23,22 @@ docker run -it \
     dpage/pgadmin4
 ```
 
+```bash
+# for subsequent starts after the container exits
+docker start -ai pg-database
+docker start -ai pgadmin
+```
+
 ---
 
 ```bash
 # to connect to the postgres instance using pgcli
 pgcli -h localhost -u root -d ny_taxi
 ```
+
+---
+# dockerize ingest_data.py
+docker build -t taxi_ingest:v001 .
+
+docker run -it --network=pg-network \
+    taxi_ingest:v001
