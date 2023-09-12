@@ -49,3 +49,12 @@ docker run -it --network=pg-network \
     --db=ny_taxi \
     --table_name=yellow_taxi_data \
     --url=${URL}
+
+# Use docker compose for bringing up postgres + pgadmin
+
+```bash
+docker compose up
+docker compose up -d
+docker compose down
+```
+
