@@ -1,4 +1,7 @@
 terraform {
+  backend "gcs" {
+    bucket = "dtc-tfstate-bucket_evocative-tide-398716"
+  }
   required_version = "1.5.7"
   required_providers {
     google = {
@@ -18,6 +21,18 @@ provider "google" {
     project = var.project
     region  = "us-east4" # N. Virginia
     zone    = "us-east4-a" # See regions and zones at https://cloud.google.com/compute/docs/regions-zones
+}
+
+# tfstate bucket
+# Ref: https://cloud.google.com/docs/terraform/resource-management/store-state
+resource "google_storage_bucket" "tfstate-bucket" {
+  name          = "dtc-tfstate-bucket_evocative-tide-398716"
+  location      = "us-east4"
+  storage_class = "STANDARD"
+  force_destroy = false
+  versioning {
+    enabled = true
+  }
 }
 
 # Data Lake Bucket
