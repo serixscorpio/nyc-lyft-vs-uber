@@ -29,7 +29,8 @@ resource "google_storage_bucket" "tfstate-bucket" {
   name          = "dtc-tfstate-bucket_evocative-tide-398716"
   location      = "us-east4"
   storage_class = "STANDARD"
-  force_destroy = false
+  force_destroy = false # prevent accidental deletion.  Must be deleted manually.
+                        # a hack to preserve infra for tfstate when callig terraform destroy.
   versioning {
     enabled = true
   }
