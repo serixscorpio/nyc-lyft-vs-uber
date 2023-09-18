@@ -7,26 +7,38 @@ name: week_2_workflow_orchestration
 prefect-version: 2.13.1
 
 # build section allows you to manage and build docker images
-build: null
+build:
 
 # push section allows you to manage if and how this project is uploaded to remote locations
-push: null
+push:
 
 # pull section allows you to provide instructions for cloning this project in remote locations
 pull:
 - prefect.deployments.steps.set_working_directory:
-    directory: /home/eric/code/serixscorpio/data-engineering-zoomcamp/week_2_workflow_orchestration
+    directory: 
+      /home/eric/code/serixscorpio/data-engineering-zoomcamp/week_2_workflow_orchestration
 
 # the deployments section allows you to provide configuration for deploying flows
 deployments:
 - name: default
-  version: null
+  version:
   tags: []
   description: orchestrate web_to_gcs
   entrypoint: web_to_gcs.py:web_to_gcs
   parameters: {}
   work_pool:
     name: local-process
-    work_queue_name: null
+    work_queue_name:
     job_variables: {}
-  schedule: null
+  schedule:
+- name: default
+  version:
+  tags: []
+  description: orchestrate gcs_to_bq
+  entrypoint: gcs_to_bq.py:gcs_to_bq
+  parameters: {}
+  work_pool:
+    name: local-process
+    work_queue_name:
+    job_variables: {}
+  schedule:
