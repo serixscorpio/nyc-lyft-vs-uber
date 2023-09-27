@@ -30,6 +30,10 @@ def gcs_to_bq():
         "evocative-tide-398716.dtc_nyc_trip_data.rides",
         job_config=bigquery.LoadJobConfig(
             write_disposition="WRITE_TRUNCATE",
+            time_partitioning=bigquery.TimePartitioning(
+                type_=bigquery.TimePartitioningType.DAY,
+                field="tpep_pickup_datetime",
+            ),
         ),
     )
     # approach 1: use pandas-gbq
