@@ -1,6 +1,7 @@
 from io import BytesIO
 
 import pandas as pd
+from google.cloud import bigquery
 from prefect import flow
 from prefect_gcp.cloud_storage import GcsBucket
 
@@ -23,8 +24,17 @@ def gcs_to_bq():
     df.passenger_count.fillna(0, inplace=True)
     print(f"post: missing passenger count: {df.passenger_count.isna().sum()}")
     # 3. panda dataframe to bigquery
-    df.to_gbq(
-        destination_table="dtc_nyc_trip_data.rides",
-        project_id="evocative-tide-398716",
-        if_exists="append",
+    # approach 2: use bigquery client
+    bigquery.Client().load_table_from_dataframe(
+        df,
+        "evocative-tide-398716.dtc_nyc_trip_data.rides",
+        job_config=bigquery.LoadJobConfig(
+            write_disposition="WRITE_TRUNCATE",
+        ),
     )
+    # approach 1: use pandas-gbq
+    # df.to_gbq(
+    #     destination_table="dtc_nyc_trip_data.rides",
+    #     project_id="evocative-tide-398716",
+    #     if_exists="append",
+    # )
