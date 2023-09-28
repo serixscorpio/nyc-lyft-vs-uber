@@ -34,6 +34,12 @@ def gcs_to_bq():
                 type_=bigquery.TimePartitioningType.DAY,
                 field="tpep_pickup_datetime",
             ),
+            # range_partitioning=bigquery.table.RangePartitioning(
+            #     field="payment_type",
+            #     range_=bigquery.table.PartitionRange(start=1, end=7, interval=1),
+            # ),
+            # clustering_fields=["tpep_pickup_datetime"],
+            clustering_fields=["payment_type"],
         ),
     )
     # approach 1: use pandas-gbq
