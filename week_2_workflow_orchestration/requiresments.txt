@@ -1,3 +1,4 @@
 google-cloud-bigquery >= 3.11.4
 prefect >= 2.13.1
 pandas[parquet,gcp] >= 2.1.0
+httpx >= 0.25.0

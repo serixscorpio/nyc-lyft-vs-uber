@@ -15,9 +15,9 @@
     ```bash
     prefect worker start --pool 'local-process'
     ```
-1. To schedule a run for this deployment, use the following command:
+1. To schedule a run for this deployment, use the following command. If the `--param` flag is not specified, it defaults to the below parquet file name:
     ```bash
-    prefect deployment run 'web-to-gcs/default'
+    prefect deployment run 'web-to-gcs/default' --param file_name=yellow_tripdata_2023-06.parquet
     ```
 
 ### simple run of GCS (Google Cloud Storage) to GBQ (Google BigQuery)
