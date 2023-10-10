@@ -1,3 +1,7 @@
+## Data Pipeline
+
+![data pipeline](images/nyc_taxi_data_diagram.svg)
+
 ### Prerequisites
 
 - [Install](https://cloud.google.com/sdk/docs/install#deb) `gcloud` CLI.
