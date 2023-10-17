@@ -14,9 +14,7 @@ def gcs_to_bq():
     # input bucket name + gcp credentials (implicit)
     gcs_bucket = GcsBucket(bucket="dtc-tfstate-bucket_evocative-tide-398716")
     with BytesIO() as buf:
-        gcs_bucket.download_object_to_file_object(
-            "yellow_tripdata_2023-06.parquet", buf
-        )
+        gcs_bucket.download_object_to_file_object("yellow_tripdata_2023-05.parquet", buf)
         df: pd.DataFrame = pd.read_parquet(buf)
     # parquet file to panda dataframe
     # fill in zero passengers

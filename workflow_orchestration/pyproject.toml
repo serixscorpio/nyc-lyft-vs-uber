@@ -27,7 +27,7 @@ classifiers = [
 dependencies = [
   "google-cloud-bigquery>=3.11.4",
   "httpx>=0.25.0",
-  "pandas[parquet,gcp]>=2.1.0",
+  "pandas[parquet]>=2.1.0",
   "prefect>=2.13.4",
   "prefect-gcp>=0.5.0",
 ]

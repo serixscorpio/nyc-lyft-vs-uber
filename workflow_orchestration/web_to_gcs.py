@@ -24,10 +24,9 @@ def write_to_gcs(b: BytesIO, to_path_name: str) -> None:
     """
     upload local file to gcs bucket
     """
-    GcsBucket(
-        bucket="dtc-tfstate-bucket_evocative-tide-398716"
-    ).upload_from_file_object(from_file_object=b, to_path=to_path_name, timeout=600)
-    return
+    GcsBucket(bucket="dtc-tfstate-bucket_evocative-tide-398716").upload_from_file_object(
+        from_file_object=b, to_path=to_path_name, timeout=600
+    )
 
 
 @flow(name="web-to-gcs", log_prints=True)
@@ -37,7 +36,7 @@ def web_to_gcs(file_name: str = "yellow_tripdata_2023-06.parquet") -> None:
     """
     b = fetch_taxi_data(file_name)
     write_to_gcs(b, file_name)
-    return
+    return file_name
 
 
 # trigger cloud function to load data into bigquery (tentative)
