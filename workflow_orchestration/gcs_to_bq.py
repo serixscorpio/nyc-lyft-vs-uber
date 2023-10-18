@@ -7,14 +7,14 @@ from prefect_gcp.cloud_storage import GcsBucket
 
 
 @flow(name="gcs-to-bq", log_prints=True)
-def gcs_to_bq():
+def gcs_to_bq(file_name: str) -> None:
     """
     orchestrate gcs_to_bq
     """
     # input bucket name + gcp credentials (implicit)
     gcs_bucket = GcsBucket(bucket="dtc-tfstate-bucket_evocative-tide-398716")
     with BytesIO() as buf:
-        gcs_bucket.download_object_to_file_object("yellow_tripdata_2023-05.parquet", buf)
+        gcs_bucket.download_object_to_file_object(file_name, buf)
         df: pd.DataFrame = pd.read_parquet(buf)
     # parquet file to panda dataframe
     # fill in zero passengers
