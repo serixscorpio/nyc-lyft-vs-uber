@@ -1,3 +1,4 @@
+**/logs
 **/pg_db_file
 **/.terraform*
 **/terraform.tfstate*
