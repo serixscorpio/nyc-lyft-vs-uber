@@ -1,14 +1,12 @@
-{{ config(materialized="table") }}
+{{ config(materialized="view", cluster_by=["pickup_datehour", "hvfhs_company"]) }}
 
-{% set sql_latest_date %}
-    select latest_date from {{ ref("stg_latest_date") }}
-{% endset %}
-
-select *
+select
+    case when hvfhs_license_num = 'HV0003' then 'Uber'
+         when hvfhs_license_num = 'HV0005' then 'Lyft'
+         else 'Other'
+    end as hvfhs_company,
+    driver_pay,
+    timestamp_trunc(pickup_datetime, hour) as pickup_datehour
+    -- timestamp_diff(pickup_datetime, request_datetime, MINUTE) as wait_time_in_minutes
 from {{ source("nyc_taxi", "rides") }}
-{% if target.name == "dev" %}
-    -- limit data size to the latest partition (latest date) when working in dev.
-    where
-        timestamp_trunc(pickup_datetime, day)
-        = timestamp('{{ dbt_utils.get_single_value(sql_latest_date) }}')
-{% endif %}
+where driver_pay > 0
