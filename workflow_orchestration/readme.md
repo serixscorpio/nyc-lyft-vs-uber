@@ -24,8 +24,12 @@
     ```bash
     prefect worker start --pool 'local-process' --type process
     ```
-1. Within a virtual env, start flow run(s):
+1. Within a virtual env, start flow run to load parquet data from GCS into Bigquery:
     ```zsh
-    python local_deploy.py
+    python gcs_to_bq.py
+    ```
+    - Data is not yet in GCS, download parquet files and then load from GCS into Bigquery:
+    ```zsh
+    python web_to_bq.py
     ```
 1. Go to dashboard `http://127.0.0.1:4200/flow-runs` to see flow run(s) in action.
