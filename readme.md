@@ -1,8 +1,8 @@
 ## Data Pipeline
 
-![data pipeline](images/nyc_taxi_data_diagram.svg)
+![data pipeline](images/nyc-lyft-vs-uber-pipeline.svg)
 
-## Local Setup
+## Setup
 ### Prerequisites
 
 - [Install](https://cloud.google.com/sdk/docs/install#deb) `gcloud` CLI.
