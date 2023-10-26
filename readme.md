@@ -12,7 +12,7 @@ Since this dataset is available to the public, there's probably no paradigm shif
 
 This is a dashboard based on the data.
 
-![nyc lyft vs uber dashboard](assets/nyc-lyft-vs-uber-dashboard.mp4)
+![nyc lyft vs uber dashboard](assets/nyc-lyft-vs-uber-dashboard.gif)
 
 ## Data Pipeline
 
