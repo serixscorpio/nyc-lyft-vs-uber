@@ -8,12 +8,6 @@ Since this dataset is available to the public, there's probably no paradigm shif
 2. On average, does Uber or Lyft have shorter wait times?
 3. Do Uber or Lyft drivers get paid more?
 
-## Results
-
-This is a dashboard based on the data.
-
-![nyc lyft vs uber dashboard](assets/nyc-lyft-vs-uber-dashboard.gif)
-
 ## Data Pipeline
 
 ![data pipeline](assets/nyc-lyft-vs-uber-pipeline.svg)
@@ -49,3 +43,15 @@ This is a dashboard based on the data.
     python web_to_bq.py
     ```
 1. Go to dashboard `http://127.0.0.1:4200/flow-runs` to see flow run(s) in action.
+
+## Results
+
+This is a dashboard based on the data.
+
+![nyc lyft vs uber dashboard](assets/nyc-lyft-vs-uber-dashboard.gif)
+
+So, which day of the week has the most Uber/Lyft trips?  From the top bar chart, we observe both Uber and Lyft's trip count have a weekly pattern starting with relatively low volumes on Mondays, then steadily increasing mid-week.  Them volumes peak on Saturdays, followed by a drop on Sunday, then back to the trough on Monday.
+
+From the bottom left line graph, we note that Uber drivers get paid more than Lyft drivers on a per trip basis in July 2023.  If I were to become a rideshare driver, I'm more inclined to pick Uber.  Examining the data over a longer time period may strengthen or weaken this claim.  Further causal analysis may be explain the pay difference.
+
+On average, does Uber or Lyft have shorter wait times?  Looking at the bottom right bar chart, Uber trips' wait time distribution tend to skew slightly towards the short end.  However, the difference is probably barely noticeable to a rider since about 80% of Lyft and Uber's trips have wait times under 6 minutes.
