@@ -1,6 +1,22 @@
+NYC Lyft vs Uber is a data pipeline I put together to learn data engineering while goign over the curriculum from [DataTalksClub Data Engineering Zoomcamp](https://github.com/DataTalksClub/data-engineering-zoomcamp).
+
+I chose to work with well-known data from [NYC Taxi and Limousine Commission (TLC)](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page), specifically focusing on High Volume For-Hire Vehicle Trip Records.  This includes Uber and Lyft trips within NYC (see [data dictionary](https://www.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_hvfhs.pdf)).  Historically, there are more than two high volume for-hire services in NYC, but Juno and Via ceased operations in November 2019 and December 2021, respectively.
+
+Since this dataset is available to the public, there's probably no paradigm shifting proprietary insight one can glean from it.  But we can point to some evidence when answering trivia questions like:
+
+1. Which day of the week has the most Uber/Lyft trips?
+2. On average, does Uber or Lyft have shorter wait times?
+3. Do Uber or Lyft drivers get paid more?
+
+## Results
+
+This is a dashboard based on the data.
+
+![nyc lyft vs uber dashboard](assets/nyc-lyft-vs-uber-dashboard.mp4)
+
 ## Data Pipeline
 
-![data pipeline](images/nyc-lyft-vs-uber-pipeline.svg)
+![data pipeline](assets/nyc-lyft-vs-uber-pipeline.svg)
 
 ## Setup
 ### Prerequisites
