@@ -19,6 +19,13 @@ Since this dataset is available to the public, there's probably no paradigm shif
 - Obtain [gcloud credentials](https://cloud.google.com/sdk/gcloud/reference/auth/login): `gcloud auth login`.
 - Set current gcloud project ID:`gcloud config set project PROJECT_ID`
 - Set up application default credentials: `gcloud auth application-default login`.
+- Run terraform to deploy infrastructure on Google Cloud.
+
+    ```zsh
+    terraform init  # initialize terraform
+    terraform plan  # build a deployment plan
+    terraform apply # apply the deployment plan, actually deploying the infrastructure
+    ```
 
 ### Run pipeline
 

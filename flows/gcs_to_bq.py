@@ -13,7 +13,7 @@ def gcs_to_bq(file_name: str) -> None:
     orchestrate gcs_to_bq
     """
     # input bucket name + gcp credentials (implicit)
-    gcs_bucket = GcsBucket(bucket="dtc-tfstate-bucket_evocative-tide-398716")
+    gcs_bucket = GcsBucket(bucket="nyc-lyft-vs-uber-data-lake")
     # parquet file to panda dataframe
     with BytesIO() as buf:
         gcs_bucket.download_object_to_file_object(file_name, buf)
@@ -29,7 +29,7 @@ def gcs_to_bq(file_name: str) -> None:
     # load dataframe into bigquery
     bigquery.Client().load_table_from_dataframe(
         df,
-        "evocative-tide-398716.dtc_nyc_trip_data.rides",
+        "nyc-lyft-vs-uber.warehouse.rides",
         job_config=bigquery.LoadJobConfig(
             write_disposition=bigquery.WriteDisposition.WRITE_APPEND,
             time_partitioning=bigquery.TimePartitioning(
