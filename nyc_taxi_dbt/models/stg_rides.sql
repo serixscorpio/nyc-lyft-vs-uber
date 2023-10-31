@@ -11,5 +11,5 @@ select
     driver_pay,
     timestamp_trunc(pickup_datetime, hour) as pickup_datehour,
     timestamp_diff(pickup_datetime, request_datetime, minute) as wait_time_in_minutes
-from {{ source("nyc_taxi", "rides") }}
+from {{ source("warehouse", "rides") }}
 where driver_pay > 0

@@ -1,0 +1,12 @@
+
+version: 2
+
+sources:
+  - name: warehouse
+    schema: warehouse
+    tables:
+      - name: rides
+  - name: warehouse_partition
+    schema: 'warehouse.INFORMATION_SCHEMA'
+    tables:
+      - name: PARTITIONS
