@@ -17,10 +17,10 @@ provider "google" {
   region  = "us-east1"
 }
 
-resource "google_storage_bucket" "data-lake-bucket" {
+resource "google_storage_bucket" "datalake" {
   # bucket names must be unique across all of Google Cloud Platform
   # see https://cloud.google.com/storage/docs/buckets#naming
-  name     = "${var.project}-data-lake"
+  name     = "nyc-lyft-vs-uber-data-lake"
   location = "US"
 
   force_destroy = true
@@ -30,7 +30,7 @@ resource "google_storage_bucket" "data-lake-bucket" {
   uniform_bucket_level_access = true
 }
 
-resource "google_bigquery_dataset" "warehouse-bq" {
+resource "google_bigquery_dataset" "warehouse" {
   dataset_id = "warehouse"
   location   = "US"
 
