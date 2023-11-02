@@ -37,6 +37,3 @@ def web_to_gcs(file_name: str = "yellow_tripdata_2023-06.parquet") -> None:
     b = fetch_taxi_data(file_name)
     write_to_gcs(b, file_name)
     return file_name
-
-
-# trigger cloud function to load data into bigquery (tentative)
