@@ -12,44 +12,46 @@ Since this dataset is available to the public, there's probably no paradigm shif
 
 ![data pipeline](assets/nyc-lyft-vs-uber-pipeline.svg)
 
+## Prerequisites
+
+- A service account key from a Google Cloud project.  The account key (in the form of a json file) is necessary for Terraform to manage cloud resources and to run data pipelines.
+- `gcloud` CLI [Installed](https://cloud.google.com/sdk/docs/install#deb).
+
+
 ## Setup
-### Prerequisites
 
-- [Install](https://cloud.google.com/sdk/docs/install#deb) `gcloud` CLI.
-- Obtain [gcloud credentials](https://cloud.google.com/sdk/gcloud/reference/auth/login): `gcloud auth login`.
-- Set current gcloud project ID:`gcloud config set project PROJECT_ID`
-- Set up application default credentials: `gcloud auth application-default login`.
-- Run terraform to deploy infrastructure on Google Cloud.
-
+1. Authenticate with Google cloud using service account:
+    ```zsh
+    gcloud auth activate-service-account --key-file=/path/to/your/gcloud-service-account-key.json
+    ```
+1. Run terraform to deploy infrastructure on Google Cloud.
     ```zsh
     terraform init  # initialize terraform
     terraform plan  # build a deployment plan
     terraform apply # apply the deployment plan, actually deploying the infrastructure
     ```
-
-### Run pipeline
-
-1. (Optional) Start with a clean slate by [resetting prefect server database](https://docs.prefect.io/2.13.5/guides/host/?h=server#using-the-database):
+1. One-time prefect configuration:
     ```zsh
-    prefect server database reset -y
+    # Set up a prefect profile
+    prefect profile create dev_cloud
+    prefect profile use dev_cloud
+    prefect config set PREFECT_LOGGING_LEVEL=DEBUG
+    prefect config set PREFECT_API_KEY=your_api_key
+    # Choose workspace to use in prefect cloud
+    prefect cloud workspace set --workspace "your_account/nyc-lyft-vs-uber"
     ```
-1. Start prefect server locally:
-    ```bash
-    prefect server start
-    ```
-1. Within a virtual env, start a worker in a separate terminal that pulls work from a work pool named `local-process`:
-    ```bash
-    prefect worker start --pool 'local-process' --type process
-    ```
-1. Within a virtual env, start flow run to load parquet data from GCS into Bigquery:
+1. Preparation before running prefect deployments: 
     ```zsh
-    python gcs_to_bq.py
+    # in terminal 1, create a worker process and a work pool
+    prefect worker start --pool 'process-pool' --type process
+    # in terminal 2, create & register blocks and deployments
+    python deploy_locally.py
     ```
-    - Data is not yet in GCS, download parquet files and then load from GCS into Bigquery:
+1. Run a prefect deployment.
     ```zsh
-    python web_to_bq.py
+    # Transform using DBT
+    prefect deployment run dbt-nyc-lyft-vs-uber/local-process
     ```
-1. Go to dashboard `http://127.0.0.1:4200/flow-runs` to see flow run(s) in action.
 
 ## Results
 
